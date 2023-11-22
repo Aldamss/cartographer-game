@@ -1,0 +1,21 @@
+:root {
+    --text: #4c556d;
+    --primary: #7d969c;
+    --secondary: #4c556d;
+    --accent: #e0705c;
+    --bg: #faf7f0;
+
+    --ui: #94a1b0;
+    --highlight: #89969e;
+}
+
+/*
+"primary": $primary,
+"secondary": $secondary,
+"success": $success,
+"info": $info,
+"warning": $warning,
+"danger": $danger,
+"light": $light,
+"dark": $dark
+*/

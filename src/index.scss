@@ -1,0 +1,434 @@
+:root {
+  --delay: 200ms;
+  --rotate-0: rotateY(0deg);
+  --rotate-90: rotateY(90deg);
+  --transition: all ease-in 200ms;
+  --radius: 0.25rem;
+  --shadow: 0 1px 5px #7f7f7f90;
+  --tile-width: 4vw;
+  --tile-width-mobile: 16vw;
+  --card-width: 8vw;
+  --card-width-mobile: 28vw;
+  --card-enter: enter 600ms ease;
+  --font-family: -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, "Segoe UI";
+  font-size: 1rem;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
+  -webkit-user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  &::before,
+  &::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+    -webkit-user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+body {
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+}
+
+html {
+  height: -webkit-fill-available;
+}
+
+body {
+  font-family: var(--font-family);
+  overflow: auto;
+  color: var(--text);
+  background: repeat center center fixed;
+  background-image: url("../public/assets/Topographic-Map-Patterns/Topographic-Map-Pattern-5.png");
+  background-color: var(--bg);
+  background-blend-mode: overlay;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 25%;
+  height: 100%;
+  padding: 1rem;
+  margin: auto;
+}
+
+/* ========= Menu ======================== */
+
+header {
+  height: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: var(--radius);
+  animation: var(--card-enter);
+  background-color: var(--bg);
+}
+
+.logo {
+  height: 50px;
+  aspect-ratio: 1/1;
+  background-image: url('../public/assets/UI/logo.png');
+  background-size: contain;
+}
+
+h3 {
+  margin: auto;
+  color: var(--accent);
+
+  &::after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+}
+
+h6 {
+  margin: auto;
+  color: var(--text);
+}
+
+.button {
+  color: black;
+  background-color: var(--highlight);
+  width: 20%;
+}
+
+/* ========= Game ========================= */
+
+.game {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 85%;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(5, auto);
+  grid-template-rows: repeat(5, auto);
+  border: 5px solid var(--secondary);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  background-color: var(--bg);
+  padding: 10px;
+  margin: 15px auto;
+}
+
+.deck {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.gameover {
+
+  .tile-ui,
+  .tile-card {
+    opacity: 0;
+  }
+}
+
+/* ========= Tiles ========================= */
+
+.tile {
+  display: flex;
+  position: relative;
+  width: var(--tile-width);
+  aspect-ratio: 1/1;
+
+  div {
+    width: 100%;
+    aspect-ratio: 1/1;
+  }
+
+  img {
+    pointer-events: none;
+    position: absolute;
+    width: 100%;
+    aspect-ratio: 1/1;
+  }
+}
+
+.terrain {
+  z-index: 0;
+  transform: scale(1.25);
+}
+
+.placed-card {
+  z-index: 1;
+  border: 2px dashed rgba(0, 0, 0, 0.05);
+}
+
+.tile-card,
+.tile-ui {
+  margin: 3px;
+  transition: var(--transition);
+  z-index: 2;
+}
+
+.tile-ui:not(.tile-placed) {
+  background-color: transparent;
+  border: 3px solid var(--primary);
+  border-radius: var(--radius);
+}
+
+/* ========= Card ========================= */
+
+.cards {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 15px 0;
+}
+
+.tile-card {
+  background-color: var(--ui);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+
+  width: 9vw;
+  aspect-ratio: 2/3;
+  margin: 0;
+
+  &:hover,
+  &:active {
+    background-color: var(--highlight);
+    transform: translateY(-12px);
+  }
+
+  img {
+    background-color: var(--bg);
+    border-radius: var(--radius);
+  }
+
+  img,
+  .grid {
+    aspect-ratio: 1/1;
+  }
+
+  .tile-card-wrapper {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+
+    >* {
+      padding: 0 12px;
+    }
+
+    .tile-card-title {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+
+      max-height: 15%;
+
+      img {
+        background-color: var(--secondary);
+        height: 100%;
+        border-radius: 0;
+      }
+
+      &:first-child {
+        flex-grow: 2;
+      }
+
+      &:last-child {
+        flex-grow: 1;
+        margin: 0;
+      }
+    }
+
+    .tile-card-image {
+      display: flex;
+      justify-content: center;
+
+      background-color: var(--bg);
+
+      height: 30%;
+      padding: 0;
+
+      img {
+        height: 100%;
+        aspect-ratio: 1/1;
+        margin: 0 auto;
+      }
+    }
+
+    .tile-card-description {
+      height: 50%;
+      padding: 2px 0;
+      text-align: center;
+
+      p {
+        font-size: 0.7rem;
+      }
+
+      .grid {
+        height: 50%;
+        margin: 0 auto;
+      }
+
+      .tile-card-interaction {
+        display: flex;
+        flex-direction: row;
+
+        img {
+          width: 1.5vw;
+          margin: 1px;
+        }
+
+        .row {
+          display: flex;
+          flex-wrap: wrap;
+          margin: 0 auto;
+        }
+      }
+    }
+  }
+}
+
+/* ========= Other ========================= */
+
+.pile {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+
+  .progress {
+    flex: 1;
+  }
+}
+
+.progress-bar {
+  height: 10%;
+  background-color: var(--secondary);
+}
+
+.grid {
+  display: grid;
+  padding: 1%;
+  border: 3px solid var(--secondary);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  background-color: var(--primary);
+  grid-template-columns: repeat(5, auto);
+  grid-template-rows: repeat(5, auto);
+
+  .cell {
+    background-color: var(--secondary);
+    border: 1px solid var(--primary);
+    border-radius: 15%;
+  }
+}
+
+.separator {
+  width: 1px;
+  margin: 0 5px;
+  background-color: var(--bg);
+}
+
+/* ========= Selected ========================= */
+
+.tile-ui.selected {
+  transform: scale(1) translateY(-8px);
+  border-width: 5px;
+  border-color: var(--highlight);
+
+  &:hover,
+  &:active {
+    transform: scale(1.02) translateY(-10px);
+    border-color: var(--accent);
+  }
+}
+
+.tile-card.selected {
+  background-color: var(--accent);
+  transform: translateY(-12px);
+}
+
+.cell.selected {
+  transform: scale(1.25);
+  background-color: var(--accent);
+  border: 1px solid var(--bg);
+}
+
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ========= Mobile ===================== */
+@media screen and (max-width: 720px) {
+  #root {
+    width: 100%;
+    padding: 0;
+  }
+
+  header {
+    border-radius: 0;
+  }
+
+  .tile {
+    width: var(--tile-width-mobile);
+  }
+
+  .tile-card {
+    width: 45vw;
+
+    font-size: 1.5rem;
+  }
+
+  .tile-card-interaction {
+    .row>img {
+      width: 8vw !important;
+    }
+  }
+
+  .tile-card-description>p {
+    font-size: 1rem !important;
+  }
+}
